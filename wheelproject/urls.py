@@ -22,7 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cars/',include('cars.urls')),
     path('accounts/',include('accounts.urls')),
-    path('Bookings/',include('Bookings.urls')),
+    path('bookings/',include('Bookings.urls')),
     path('Vehicles', include('Vehicles.urls')),
+    path('acc/',include('accountsnew.urls')),
+    path('payment/',include('payments.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]

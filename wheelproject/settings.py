@@ -48,8 +48,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'accounts',
     'Vehicles',
+    'accountsnew',
     'rest_framework_simplejwt',
-    
+    'payments',    
 ]
 
 MIDDLEWARE = [
@@ -172,6 +173,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+RAZORPAY_PUBLIC_KEY='rzp_test_Wg9g7aSl8rGdmP',
+RAZORPAY__SECRET_KEY='JhinxMUOsC3sN0oC8SiCsilE'
 
 
 

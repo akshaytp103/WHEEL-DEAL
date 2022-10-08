@@ -9,12 +9,7 @@ from .serializers import BookingSerializer
 
 
 class BookingViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-    User have CRUD operations on own objects.
-    Staff have CRUD operation on all objects.
-    """
+    
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, OrderingFilter]
