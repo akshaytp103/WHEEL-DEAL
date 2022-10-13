@@ -8,7 +8,7 @@ from .authentication import create_access_token,create_refresh_token,decode_refr
 
 # Create your views here.
 class RegisterView(APIView):
-
+  
     def post(self,request):
         serializer = AccountSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

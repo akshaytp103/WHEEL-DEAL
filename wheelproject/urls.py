@@ -24,7 +24,6 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('bookings/',include('Bookings.urls')),
     path('Vehicles', include('Vehicles.urls')),
-    path('acc/',include('accountsnew.urls')),
     path('payment/',include('payments.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]

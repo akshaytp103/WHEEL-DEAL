@@ -71,18 +71,18 @@ class Car(models.Model):
         return self.name
     
     
-class Cars_ARC(models.Model):
-    id_car = models.CharField(max_length=5)
-    id_location = models.CharField(max_length=5)
-    name = models.CharField(max_length=255)
-    short_name = models.CharField(max_length=100)
-    code_registration = models.CharField(max_length=20)
-    creator_ARC = models.CharField(max_length=255)
-    change_date = models.DateTimeField(auto_now_add=True)
-    on_the_way = models.BooleanField(default=False)
-    location = models.CharField(max_length=255, null=True, blank=True)
-    to_the_location = models.CharField(max_length=255, null=True, blank=True)
-    come_back = models.BooleanField(default=False)
+# class Cars_ARC(models.Model):
+#     id_car = models.CharField(max_length=5)
+#     id_location = models.CharField(max_length=5)
+#     name = models.CharField(max_length=255)
+#     short_name = models.CharField(max_length=100)
+#     code_registration = models.CharField(max_length=20)
+#     creator_ARC = models.CharField(max_length=255)
+#     change_date = models.DateTimeField(auto_now_add=True)
+#     on_the_way = models.BooleanField(default=False)
+#     location = models.CharField(max_length=255, null=True, blank=True)
+#     to_the_location = models.CharField(max_length=255, null=True, blank=True)
+#     come_back = models.BooleanField(default=False)
     
     
 class Cars_Reservation(models.Model):

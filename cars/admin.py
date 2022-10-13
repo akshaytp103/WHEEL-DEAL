@@ -15,8 +15,8 @@ class CarModel(admin.ModelAdmin):
 admin.site.register(Location)
 admin.site.register(Dealer)
 admin.site.register(Car)
-admin.site.register(Cars_ARC)
-admin.site.register(Cars_Rents)
+# admin.site.register(Cars_ARC)
+# admin.site.register(Cars_Rents)
 admin.site.register(Cars_Reservation)
 
 # prepopulated_fields = {'slug': ('name',)}

@@ -287,92 +287,92 @@ class CarsRentsSerializer(serializers.HyperlinkedModelSerializer):
     #     queryset=Car.objects.all(),
     #     label='Car')
            
-    class Meta:
-        model =Cars_Rents
-        fields = ['url', 'id_cars', 'client', 'car','client_document_type','client_document_identification', 'date_from', 
-                  'date_to', 'creator', 'client_phone','slug',
-                  'total_price','options']
-        lookup_field = 'slug'
-        extra_kwargs = {
-            'url': {'lookup_field': 'slug'},
-            'total_price': {'read_only':True}
-        }
+    # class Meta:
+    #     model =Cars_Rents
+    #     fields = ['url', 'id_cars', 'client', 'car','client_document_type','client_document_identification', 'date_from', 
+    #               'date_to', 'creator', 'client_phone','slug',
+    #               'total_price','options']
+    #     lookup_field = 'slug'
+    #     extra_kwargs = {
+    #         'url': {'lookup_field': 'slug'},
+    #         'total_price': {'read_only':True}
+    #     }
                 
-    def validate(self, data):
-        """
-        Ensures that user can not book a car this is already booked
-        in selected period
-        """
-        booking_start = data.get('date_from')
-        booking_end = data.get('date_to')
-        car = data.get('id_cars')
-        instance = self.instance
+    # def validate(self, data):
+    #     """
+    #     Ensures that user can not book a car this is already booked
+    #     in selected period
+    #     """
+    #     booking_start = data.get('date_from')
+    #     booking_end = data.get('date_to')
+    #     car = data.get('id_cars')
+    #     instance = self.instance
         
-        # Requested booking ends during existing booking, 
-        # select sooner booking end date
-        case_1 = Cars_Rents.objects.filter(car=car,
-                                        booking_start__lte=booking_start,
-                                        booking_end__gte=booking_start
-        ).exists()
-        # Requested booking starts during existing booking,
-        # select later booking start date
-        case_2 = Cars_Rents.objects.filter(car=car,
-                                        booking_start__lte=booking_end,
-                                        booking_end__gte=booking_end
-        ).exists()
-        # Requested booking starts and ends during existing booking
-        case_3 = Cars_Rents.objects.filter(car=car,
-                                        booking_start__gte=booking_start,
-                                        booking_end__lte=booking_end
-        ).exists()
+    #     # Requested booking ends during existing booking, 
+    #     # select sooner booking end date
+    #     case_1 = Cars_Rents.objects.filter(car=car,
+    #                                     booking_start__lte=booking_start,
+    #                                     booking_end__gte=booking_start
+    #     ).exists()
+    #     # Requested booking starts during existing booking,
+    #     # select later booking start date
+    #     case_2 = Cars_Rents.objects.filter(car=car,
+    #                                     booking_start__lte=booking_end,
+    #                                     booking_end__gte=booking_end
+    #     ).exists()
+    #     # Requested booking starts and ends during existing booking
+    #     case_3 = Cars_Rents.objects.filter(car=car,
+    #                                     booking_start__gte=booking_start,
+    #                                     booking_end__lte=booking_end
+    #     ).exists()
         
-        if not (instance and instance.car == car):
-            if case_1:
-                raise ValidationError(
-                    """Requested booking ends during existing booking, \
-                    select sooner booking end date"""
-                    )
-            elif case_2:
-                raise ValidationError(
-                    "Requested booking starts during existing booking, \
-                        select later booking start date"
-                    )
-            elif case_3:
-                raise ValidationError(
-                    'Requested booking starts and ends during existing booking'
-                    )
-            return data
-        return data
+    #     if not (instance and instance.car == car):
+    #         if case_1:
+    #             raise ValidationError(
+    #                 """Requested booking ends during existing booking, \
+    #                 select sooner booking end date"""
+    #                 )
+    #         elif case_2:
+    #             raise ValidationError(
+    #                 "Requested booking starts during existing booking, \
+    #                     select later booking start date"
+    #                 )
+    #         elif case_3:
+    #             raise ValidationError(
+    #                 'Requested booking starts and ends during existing booking'
+    #                 )
+    #         return data
+    #     return data
         
-    def validate_booking_start(self, value):
-        """
-        Ensures that the earlies possible booking start day is today
-        """
-        booking_start = value
-        today_value = timezone.now().today().date()
-        if booking_start < today_value:
-            raise ValidationError(
-                f'Booking start date must be greater than {today_value}'
-                )
-        return super(CarsRentsSerializer, self).validate(value)
+    # def validate_booking_start(self, value):
+    #     """
+    #     Ensures that the earlies possible booking start day is today
+    #     """
+    #     booking_start = value
+    #     today_value = timezone.now().today().date()
+    #     if booking_start < today_value:
+    #         raise ValidationError(
+    #             f'Booking start date must be greater than {today_value}'
+    #             )
+    #     return super(CarsRentsSerializer, self).validate(value)
     
-    def validate_booking_end(self, value):
-        """
-        Ensures that booking end date can not be before booking start date
-        """
-        data = self.get_initial()
-        booking_start = data.get('booking_start')
-        booking_start = datetime.strptime(booking_start, '%Y-%m-%d').date()
-        booking_end = value
-        if booking_end < booking_start:
-            raise ValidationError(
-                'Booking end date must be greater than booking start date'
-                )
-        return super(CarsRentsSerializer, self).validate(value)
+    # def validate_booking_end(self, value):
+    #     """
+    #     Ensures that booking end date can not be before booking start date
+    #     """
+    #     data = self.get_initial()
+    #     booking_start = data.get('booking_start')
+    #     booking_start = datetime.strptime(booking_start, '%Y-%m-%d').date()
+    #     booking_end = value
+    #     if booking_end < booking_start:
+    #         raise ValidationError(
+    #             'Booking end date must be greater than booking start date'
+    #             )
+    #     return super(CarsRentsSerializer, self).validate(value)
             
-    def save(self, **kwargs):
-        """
-        Include default for read_only `client` field
-        """
-        kwargs["client"] = self.fields["client"].get_default()
-        return super().save(**kwargs)
+    # def save(self, **kwargs):
+    #     """
+    #     Include default for read_only `client` field
+    #     """
+    #     kwargs["client"] = self.fields["client"].get_default()
+    #     return super().save(**kwargs)
