@@ -18,7 +18,6 @@ from django.shortcuts import render
 def start_payment(request):
     # request.data is coming from frontend
     print(request.data)
-    print('aasajfdsjsfj')
     # order_rent=request.data['car']
     amount = request.data['amount'] 
     id = request.data['id']
@@ -141,7 +140,7 @@ def temp_payment(request):
         amount = request.POST.get('amount')
         name = request.POST['name']
         # request.session['key'] = name
-        print(11111111,name)
+        print(name)
         
 
         # client =razorpay.Client(auth=(settings.RAZORPAY_PUBLIC_KEY,settings.RAZORPAY__SECRET_KEY))
@@ -149,7 +148,7 @@ def temp_payment(request):
         payment = client.order.create({"amount": int(amount) * 100, 
                                    "currency": "INR", 
                                    "payment_capture": "1"})
-        print(5555555,payment)
+        
 
         
         
@@ -165,11 +164,7 @@ def temp_payment(request):
                                       user_id=request.user.id,
                                       order_payment_id=payment['id'])
         payment['name']=name  
-        print(payment['id'])   
-        print(77777,amount)
-        print(request.user.id) 
-        print(222222,order)                                          
-
+        
     return render(request,'payment.html',{'payment':payment,'order':order})
 
 

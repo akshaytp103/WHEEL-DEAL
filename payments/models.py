@@ -15,12 +15,9 @@ class bookingdetails(models.Model):
 
 class Order(models.Model):
     choice = ( ('Approved','Approved'),('Cancelled','Cancelled'),('Cancel','Cancel'),('Pending','Pending'))
-    # user=models.ForeignKey(Account,on_delete=models.CASCADE,null =True,blank=True)
-    # Payment=models.ForeignKey(Payment,on_delete=models.SET_NULL,null=True)
     order_rent = models.ForeignKey(Booking,on_delete=models.CASCADE,null=True,blank=True)
     order_amount = models.CharField(max_length=25)
     user_id=models.CharField(max_length=10,null=True)
-    # order_id = models.CharField(max_length=100,blank=True)
     order_payment_id = models.CharField(max_length=100)
     isPaid = models.BooleanField(default=False)
     order_date = models.DateTimeField(auto_now=True,blank=True)
