@@ -12,12 +12,6 @@ urlpatterns = [
     
     
     
-    # path("api/car/image/upload/", views.carUploadImage, name="car-upload-image"),
-    # path("api/new/cars/upload/", views.newCarUploadImage, name="new-car-upload-image"),
-    # path("api/car/", views.getCars, name="cars-list"),
-    # path("api/car/create/", views.createCar, name="create-car"),
-    # path("api/car/<str:pk>/", views.getCarById, name="get-car-by-id"),
-    # path("api/car/update/<str:pk>/", views.updateCar, name="car-update"),
     
     # carlistsbylocation 
     
@@ -96,26 +90,6 @@ urlpatterns = [
         name="update-reservation",
     ),
     
-    # carRent
-    
-    # path("rent/car/create/", views.createRentCar, name="create-rent-car"),
-    # path("rents/list/car/<str:pk>/", views.listRentsCar, name="list-rents-car"),
-    # path("rent/edit/<str:pk>/", views.editCarRent, name="edit-rent"),
-    
-    # car pick-up
-    
-    
-    # path(
-    #     "<str:pk>/rent-details/",
-    #     views.getRentDetailsByCarId,
-    #     name="get-rent-details-by-car-id",
-    # ),
-    # path("rent/update/<str:pk>/", views.carUpdateRent, name="car-update-rent"),
-    
-    
-    
-    
 ]
 router = DefaultRouter()
-router.register(r'rent', views.cars_rentsViewSet, basename='CarRentViewSet')
-urlpatterns = router.urls
+
