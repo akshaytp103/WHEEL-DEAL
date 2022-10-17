@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
+from decouple import config
 
 
 
@@ -89,14 +90,23 @@ WSGI_APPLICATION = 'wheelproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config('DB_NAME'),
+#         'USER':config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT':5432,
+#     } 
+# }
 
 
 # Password validation
@@ -174,8 +184,11 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-RAZORPAY_PUBLIC_KEY='rzp_test_Wg9g7aSl8rGdmP',
-RAZORPAY__SECRET_KEY='JhinxMUOsC3sN0oC8SiCsilE'
+# RAZORPAY_PUBLIC_KEY='rzp_test_Wg9g7aSl8rGdmP',
+# RAZORPAY__SECRET_KEY='JhinxMUOsC3sN0oC8SiCsilE'
+
+RAZORPAY_PUBLIC_KEY =config('RAZORPAY_PUBLIC_KEY')
+RAZORPAY__SECRET_KEY = config('RAZORPAY__SECRET_KEY')
 
 
 
