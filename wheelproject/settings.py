@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-e95n_84qgiy8j636o1^@x8y+16wp8m6cvb2uz0glahyvc_267)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -203,8 +203,6 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# RAZORPAY_PUBLIC_KEY='rzp_test_Wg9g7aSl8rGdmP',
-# RAZORPAY__SECRET_KEY='JhinxMUOsC3sN0oC8SiCsilE'
 
 RAZORPAY_PUBLIC_KEY =config('RAZORPAY_PUBLIC_KEY')
 RAZORPAY__SECRET_KEY = config('RAZORPAY__SECRET_KEY')
