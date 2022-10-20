@@ -49,11 +49,13 @@ INSTALLED_APPS = [
     'django_filters',
     'crispy_forms',
     'accounts',
-    'Vehicles',
     'rest_framework_simplejwt',
     'payments', 
     'storages',
-    'boto3'   
+    'boto3', 
+    'drf_yasg',  
+    'rest_framework_swagger',
+    
 ]
 
 MIDDLEWARE = [
